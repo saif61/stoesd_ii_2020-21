@@ -163,6 +163,64 @@ typedef struct PointAdd_params{
 
 } PointAdd_params_t ;
 
+typedef struct PointDouble_params{
+	__u32 prec;
+	__u32 f_sel;
+	__u32 sec_calc;
+	__u32 n[128];
+	__u32 a[128];
+	__u32 b[128];
+	__u32 x_p[128];
+	__u32 y_p[128];
+	__u32 z_p[128];
+	__u32 x_q[128];
+	__u32 y_q[128];
+	__u32 z_q[128];
+	__u32 r_p[128];
+	__u32 r_b[128];
+	__u32 r_a[128];
+	__u32 r_e[128];
+	__u32 r_x[128];
+
+} PointDouble_params_t;
+
+typedef struct PointMult_params{
+	__u32 prec;
+	__u32 f_sel;
+	__u32 sec_calc;
+	__u32 n[128];
+	__u32 a[128];
+	__u32 b[128];
+	__u32 x[128];
+	__u32 y[128];
+	__u32 r_p[128];
+	__u32 r_b[128];
+	__u32 r_a[128];
+	__u32 r_e[128];
+	__u32 r_x[128];
+	__u32 kk[192];
+	__u32 exp[128];
+
+} PointMult_params_t ;
+
+typedef struct PostOp_params{
+	__u32 prec;
+	__u32 f_sel;
+	__u32 sec_calc;
+	__u32 n[128];			
+	__u32 a[128];
+	__u32 b[128];
+	__u32 x_p[128];
+	__u32 y_p[128];
+	__u32 z_p[128];
+	__u32 exp[128];
+	__u32 r_p[128];
+	__u32 r_b[128];
+	__u32 r_a[128];
+	__u32 r_e[128];
+	__u32 r_x[128];
+} PostOp_params_t;
+
 #define IOCTL_BASE 'k' 					// magic number
 
 // NOTE: magic | cmdnumber | size of data to pass
@@ -191,3 +249,6 @@ typedef struct PointAdd_params{
 
 #define		IOCTL_MWMAC_PREP			_IOWR(IOCTL_BASE, 20, Prep_params_t)
 #define		IOCTL_MWMAC_PADD			_IOWR(IOCTL_BASE, 21, PointAdd_params_t)
+#define		IOCTL_MWMAC_PDOUBLE			_IOWR(IOCTL_BASE, 22, PointDouble_params_t)
+#define		IOCTL_MWMAC_PMULT			_IOWR(IOCTL_BASE, 23, PointMult_params_t)
+#define		IOCTL_MWMAC_POSTOP			_IOWR(IOCTL_BASE, 24, PostOp_params_t)
