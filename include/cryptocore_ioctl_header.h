@@ -125,7 +125,15 @@ typedef struct ModRed_params{
 } ModRed_params_t ;
 
 // Add CryptoCore Struct Declarations here...
-
+typedef struct Prep_params{
+	__u32 prec;
+	__u32 f_sel;
+	__u32 sec_calc;
+	__u32 n[128];
+	__u32 a[128];
+	__u32 b[128];
+	__u32 c[128];
+} Prep_params_t ;
 
 
 #define IOCTL_BASE 'k' 					// magic number
@@ -153,3 +161,5 @@ typedef struct ModRed_params{
 #define		IOCTL_MWMAC_MODRED			_IOWR(IOCTL_BASE, 19, ModRed_params_t)
 
 // Define further IOCTL commands here...
+
+#define		IOCTL_MWMAC_PREP			_IOWR(IOCTL_BASE, 20, Prep_params_t)
