@@ -37,10 +37,11 @@ int main(void)
 	0,
 	{ 0x00000080, 0x00000000, 0x00000000, 0x00000000,
 	  0x00000000, 0x00000107                         },
-	{ 12 },
-	{ 24 },
+	{ 0x5973f2ce, 0x9481d196, 0x43a811a8, 0x97599e67, 0x52b62834 },
+	{ 0x00000006, 0x55ebc626, 0xa6197260, 0x18b03f84, 0x730e81a6, 0x19142c94 },
 	{  },
 	};
+
 
     if(Prep_163_test.prec % 32) {
 		rw_prec = (Prep_163_test.prec/32 + 1) * 32;
@@ -51,6 +52,8 @@ int main(void)
     printf("A: 0x");
 	for(i=0; i<rw_prec/32; i++){
 		printf("%08x", Prep_163_test.a[i]);
+		//printf("I: %x",i);
+
 	}
 	printf("\n\n");
 
