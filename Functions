@@ -61,7 +61,7 @@
 
 
 
-    	// Read Result r_b from B Register Memory 
+    // Read Result r_b from B Register Memory 
  	for(i=0; i<128; i++){
 		PointAdd_params_ptr->r_b[128-1-i] = ioread32(MWMAC_RAM_ptr+0x3+i*0x4); //changed rw_prec/32 --> 128
 	}
