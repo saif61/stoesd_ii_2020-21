@@ -24,8 +24,8 @@ int main(void)
 	__u32 i = 0;
 	__u32 rw_prec = 0;
 
-	double seconds;
-	struct timespec tstart={0,0}, tend={0,0};
+	//double seconds;
+	//struct timespec tstart={0,0}, tend={0,0};
 
 	if ((dd = open_physical (dd)) == -1)
       return (-1);
