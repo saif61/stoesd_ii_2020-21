@@ -142,6 +142,26 @@ typedef struct Prep_params{
 
 } Prep_params_t ;
 
+typedef struct PointAdd_params{
+	__u32 prec;
+	__u32 f_sel;
+	__u32 sec_calc;
+	__u32 n[128];
+	__u32 a[128];
+	__u32 b[128];
+	__u32 x_p[128];
+	__u32 y_p[128];
+	__u32 z_p[128];
+	__u32 x_q[128];
+	__u32 y_q[128];
+	__u32 z_q[128];
+	__u32 r_p[128];
+	__u32 r_b[128];
+	__u32 r_a[128];
+	__u32 r_e[128];
+	__u32 r_x[128];
+
+} PointAdd_params_t ;
 
 #define IOCTL_BASE 'k' 					// magic number
 
@@ -170,3 +190,4 @@ typedef struct Prep_params{
 // Define further IOCTL commands here...
 
 #define		IOCTL_MWMAC_PREP			_IOWR(IOCTL_BASE, 20, Prep_params_t)
+#define		IOCTL_MWMAC_PADD			_IOWR(IOCTL_BASE, 21, PointAdd_params_t)
