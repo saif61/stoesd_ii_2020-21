@@ -1910,6 +1910,7 @@ static void MWMAC_Prep(Prep_params_t *Prep_params_ptr)
 	while(!mwmac_irq_var);
 	mwmac_irq_var = 0;
 	
+	
 	// CopyH2V(B1, A5)
 	//            Start     Abort       f_sel     sec_calc        precision         operation
 	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (COPYH2V << 8) 
@@ -1919,29 +1920,43 @@ static void MWMAC_Prep(Prep_params_t *Prep_params_ptr)
 	while(!mwmac_irq_var);
 	mwmac_irq_var = 0;
 
-	// MontR2(P1, A1)
+	// MontR2(P1, B1)
 	//            Start     Abort       f_sel     sec_calc        precision         operation
 	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (MONTR2 << 8)
 	//			src_addr      			dest_addr    		src_addr_e   	src_addr_x
-			| (MWMAC_RAM_P1 << 12) | (MWMAC_RAM_A1 << 17) | (0x0 << 22) | 	(0x0 << 27);
+			| (MWMAC_RAM_P1 << 12) | (MWMAC_RAM_B1 << 17) | (0x0 << 22) | 	(0x0 << 27);
 	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
 	while(!mwmac_irq_var);
 	mwmac_irq_var = 0;
-
-	// CopyV2V(A1, A5)
+	
+	
+	// CopyH2V(B1, A7)
 	//            Start     Abort       f_sel     sec_calc        precision         operation
-	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (COPYV2V << 8) 
+	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (COPYH2V << 8) 
 	//			src_addr      			dest_addr    		src_addr_e   	src_addr_x
-			| (MWMAC_RAM_A1 << 12) | (MWMAC_RAM_A5 << 17) | (0x0 << 22) | (0x0 << 27);
+			| (MWMAC_RAM_B1 << 12) | (MWMAC_RAM_A7 << 17) | (0x0 << 22) | (0x0 << 27);
 	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
 	while(!mwmac_irq_var);
 	mwmac_irq_var = 0;
 
+// ok
+	
 	// Write Parameter a to B Register Memory
 	for(i=0; i<rw_prec/32; i++){
 		iowrite32(Prep_params_ptr->a[rw_prec/32-1-i], (MWMAC_RAM_ptr+0x3+i*0x4));
 	}
-	// CopyH2V(B1,B5) a to E3
+
+	//Montgomerizing a
+	// MontMult(A7, B1, P1)
+	//            Start     Abort       f_sel     sec_calc        precision         operation
+	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (MONTMULT << 8) 
+	//			src_addr     			dest_addr    		src_addr_e   src_addr_x
+			| (MWMAC_RAM_B1 << 12) | (MWMAC_RAM_A7 << 17) | (0x0 << 22) | (0x0 << 27);
+	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
+	while(!mwmac_irq_var);
+	mwmac_irq_var = 0;
+
+	// CopyH2V(B1,E3) a to E3
 	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (COPYH2V << 8) 
 	//			src_addr      			dest_addr    			src_addr_e   src_addr_x
 			| (MWMAC_RAM_B1 << 12) | (MWMAC_RAM_E3 << 17) | (0x0 << 22) | (0x0 << 27);
@@ -1953,34 +1968,23 @@ static void MWMAC_Prep(Prep_params_t *Prep_params_ptr)
 	for(i=0; i<rw_prec/32; i++){
 		iowrite32(Prep_params_ptr->b[rw_prec/32-1-i], (MWMAC_RAM_ptr+0x3+i*0x4));
 	}	
+	//Montgomerizing b
+	// MontMult(A7, B1, P1)
+	//            Start     Abort       f_sel     sec_calc        precision         operation
+	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (MONTMULT << 8) 
+	//			src_addr     			dest_addr    		src_addr_e   src_addr_x
+			| (MWMAC_RAM_B1 << 12) | (MWMAC_RAM_A7 << 17) | (0x0 << 22) | (0x0 << 27);
+	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
+	while(!mwmac_irq_var);
+	mwmac_irq_var = 0;
 
-	// CopyH2V(B1,B5) b to E1
+	// CopyH2V(B1,E1) b to E1
 	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (COPYH2V << 8) 
 	//			src_addr      			dest_addr    			src_addr_e   src_addr_x
 			| (MWMAC_RAM_B1 << 12) | (MWMAC_RAM_E1 << 17) | (0x0 << 22) | (0x0 << 27);
 	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
 	while(!mwmac_irq_var);
-	mwmac_irq_var = 0;
-
-	//Montgomerizing a
-	// MontMult(A7, E3, P1)
-	//            Start     Abort       f_sel     sec_calc        precision         operation
-	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (MONTMULT << 8) 
-	//			src_addr     			dest_addr    		src_addr_e   src_addr_x
-			| (MWMAC_RAM_E3 << 12) | (MWMAC_RAM_A7 << 17) | (0x0 << 22) | (0x0 << 27);
-	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
-	while(!mwmac_irq_var);
-	mwmac_irq_var = 0;
-
-	//Montgomerizing b
-	// MontMult(A7, E1, P1)
-	//            Start     Abort       f_sel     sec_calc        precision         operation
-	mwmac_cmd = (1 << 0) | (0 << 1) | (mwmac_f_sel << 2) | (mwmac_sec_calc << 3) | (mwmac_cmd_prec << 4) | (MONTMULT << 8) 
-	//			src_addr     			dest_addr    		src_addr_e   src_addr_x
-			| (MWMAC_RAM_E1 << 12) | (MWMAC_RAM_A7 << 17) | (0x0 << 22) | (0x0 << 27);
-	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
-	while(!mwmac_irq_var);
-	mwmac_irq_var = 0;
+	mwmac_irq_var = 0;	
 
 	// Write Parameter x to B Register Memory
 	for(i=0; i<rw_prec/32; i++){
@@ -2013,9 +2017,6 @@ static void MWMAC_Prep(Prep_params_t *Prep_params_ptr)
 	iowrite32(mwmac_cmd, MWMAC_CMD_ptr);
 	while(!mwmac_irq_var);
 	mwmac_irq_var = 0;
-
-
-
 
 	// Write Parameter y to B Register Memory
 	for(i=0; i<rw_prec/32; i++){
@@ -2076,10 +2077,27 @@ static void MWMAC_Prep(Prep_params_t *Prep_params_ptr)
 	while(!mwmac_irq_var);
 	mwmac_irq_var = 0;
 
-	// Read Result c from X Register Memory 
- 	for(i=0; i<rw_prec/32; i++){
-		Prep_params_ptr->c[rw_prec/32-1-i] = ioread32(MWMAC_RAM_ptr+0x3+i*0x4);
+	// Read Result r_b from B Register Memory 
+ 	for(i=0; i<128; i++){
+		Prep_params_ptr->r_b[128-1-i] = ioread32(MWMAC_RAM_ptr+0x3+i*0x4); //changed rw_prec/32 --> 128
+	}
+	// Read Result r_p from P Register Memory 
+ 	for(i=0; i<128; i++){
+		Prep_params_ptr->r_p[128-1-i] = ioread32(MWMAC_RAM_ptr+0x2+i*0x4);
+	}
+	// Read Result r_e from E Register Memory 
+ 	for(i=0; i<128; i++){
+		Prep_params_ptr->r_e[128-1-i] = ioread32(MWMAC_RAM_ptr+0x280+i);
+	}
+	// Read Result r_x from X Register Memory 
+ 	for(i=0; i<128; i++){
+		Prep_params_ptr->r_x[128-1-i] = ioread32(MWMAC_RAM_ptr+0x300+i);
 	} 
+
+	// Read Result r_a from A Register Memory 
+ 	for(i=0; i<128; i++){
+		Prep_params_ptr->r_a[128-1-i] = ioread32(MWMAC_RAM_ptr+0x200+i);
+	}
 }
 
 

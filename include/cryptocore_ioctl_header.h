@@ -134,7 +134,12 @@ typedef struct Prep_params{
 	__u32 b[128];
 	__u32 x[128];
 	__u32 y[128];
-	__u32 c[128];
+	__u32 r_p[128];
+	__u32 r_b[128];
+	__u32 r_a[128];
+	__u32 r_e[128];
+	__u32 r_x[128];
+
 } Prep_params_t ;
 
 
