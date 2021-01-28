@@ -40,6 +40,8 @@ int main(void)
 	{ 12 },
 	{ 24 },
 	{  },
+	{  },
+	{  },
 	};
 
     if(Prep_163_test.prec % 32) {
