@@ -111,98 +111,98 @@ int main(void)
 
 	seconds = ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) - ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec);
 	if (seconds*1000000.0 > 1000.0)
-		printf("\n\nPointMult took about %.5f ms\n\n", seconds*1000.0);
+		printf("\nPointMult took about %.5f ms\n", seconds*1000.0);
 	else 
-		printf("\n\nPointMult took about %.5f us\n\n", seconds*1000000.0);	
+		printf("\nPointMult took about %.5f us\n", seconds*1000000.0);	
 	
 //Printing all memory location before post operation
     
-pos=0;
-	for(i=0;i<8;i++)
-	{
-		printf("P%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			//printf("%x", PointMult_163_test.r_p[pos]);
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%08x", PointMult_163_test.r_p[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;		
-		}
-		printf("\n");
-	}
-	pos=0;
-	for(i=0;i<8;i++)
-	{
-		printf("B%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PointMult_163_test.r_b[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
-	pos = 0;
-	for(i=0;i<8;i++)
-	{
-		printf("A%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PointMult_163_test.r_a[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
-	pos = 0;
-	for(i=0;i<8;i++)
-	{
-		printf("E%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PointMult_163_test.r_e[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
-	pos = 0;
-	for(i=0;i<8;i++)
-	{
-		printf("X%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PointMult_163_test.r_x[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
+// pos=0;
+// 	for(i=0;i<8;i++)
+// 	{
+// 		printf("P%d: ",8-i);
+// 		for(j=0;j<16;j++)
+// 		{
+// 			//printf("%x", PointMult_163_test.r_p[pos]);
+// 			if(j>(16-rw_prec/32-1))
+// 			{
+// 				printf("%08x", PointMult_163_test.r_p[pos],pos);
+// 			}
+// 			else{
+// 				printf("");
+// 			}
+// 			pos++;		
+// 		}
+// 		printf("\n");
+// 	}
+// 	pos=0;
+// 	for(i=0;i<8;i++)
+// 	{
+// 		printf("B%d: ",8-i);
+// 		for(j=0;j<16;j++)
+// 		{
+// 			if(j>(16-rw_prec/32-1))
+// 			{
+// 				printf("%x", PointMult_163_test.r_b[pos],pos);
+// 			}
+// 			else{
+// 				printf("");
+// 			}
+// 			pos++;
+// 		}
+// 		printf("\n");
+// 	}
+// 	pos = 0;
+// 	for(i=0;i<8;i++)
+// 	{
+// 		printf("A%d: ",8-i);
+// 		for(j=0;j<16;j++)
+// 		{
+// 			if(j>(16-rw_prec/32-1))
+// 			{
+// 				printf("%x", PointMult_163_test.r_a[pos],pos);
+// 			}
+// 			else{
+// 				printf("");
+// 			}
+// 			pos++;
+// 		}
+// 		printf("\n");
+// 	}
+// 	pos = 0;
+// 	for(i=0;i<8;i++)
+// 	{
+// 		printf("E%d: ",8-i);
+// 		for(j=0;j<16;j++)
+// 		{
+// 			if(j>(16-rw_prec/32-1))
+// 			{
+// 				printf("%x", PointMult_163_test.r_e[pos],pos);
+// 			}
+// 			else{
+// 				printf("");
+// 			}
+// 			pos++;
+// 		}
+// 		printf("\n");
+// 	}
+// 	pos = 0;
+// 	for(i=0;i<8;i++)
+// 	{
+// 		printf("X%d: ",8-i);
+// 		for(j=0;j<16;j++)
+// 		{
+// 			if(j>(16-rw_prec/32-1))
+// 			{
+// 				printf("%x", PointMult_163_test.r_x[pos],pos);
+// 			}
+// 			else{
+// 				printf("");
+// 			}
+// 			pos++;
+// 		}
+// 		printf("\n");
+// 	}
 
 //Calling Post operation
 	clock_gettime(CLOCK_MONOTONIC, &tstart);
@@ -216,30 +216,30 @@ pos=0;
 
 	seconds = ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) - ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec);
 	if (seconds*1000000.0 > 1000.0)
-		printf("\n\nPost-Operation took about %.5f ms\n\n", seconds*1000.0);
+		printf("\nPost-Operation took about %.5f ms\n", seconds*1000.0);
 	else 
-		printf("\n\nPost-Operation 191 took about %.5f us\n\n", seconds*1000000.0);
+		printf("\nPost-Operation 191 took about %.5f us\n", seconds*1000000.0);
 //Printing all memory locations
-	pos=0;
+	//pos=0;
 
-	for(i=0;i<8;i++)
-	{
-		printf("P%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			//printf("%x", PostOp_params_163_test.r_p[pos]);
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%08x", PostOp_params_163_test.r_p[pos],pos);
-			}
-			else{
-				printf("");
-			}
+	// for(i=0;i<8;i++)
+	// {
+	// 	printf("P%d: ",8-i);
+	// 	for(j=0;j<16;j++)
+	// 	{
+	// 		//printf("%x", PostOp_params_163_test.r_p[pos]);
+	// 		if(j>(16-rw_prec/32-1))
+	// 		{
+	// 			printf("%08x", PostOp_params_163_test.r_p[pos],pos);
+	// 		}
+	// 		else{
+	// 			printf("");
+	// 		}
 			
-			pos++;		
-		}
-		printf("\n");
-	}
+	// 		pos++;		
+	// 	}
+	// 	printf("\n");
+	// }
 	pos=0;
 	for(i=0;i<8;i++)
 	{
@@ -258,60 +258,60 @@ pos=0;
 		}
 		printf("\n");
 	}
-	pos = 0;
-	for(i=0;i<8;i++)
-	{
-		printf("A%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			//printf("%08x", PostOp_params_163_test.r_a[pos]);
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PostOp_params_163_test.r_a[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
-	pos = 0;
-	for(i=0;i<8;i++)
-	{
-		printf("E%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			//printf("%08x", PostOp_params_163_test.r_e[pos]);
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PostOp_params_163_test.r_e[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
-	pos = 0;
-	for(i=0;i<8;i++)
-	{
-		printf("X%d: ",8-i);
-		for(j=0;j<16;j++)
-		{
-			//printf("%08x", PostOp_params_163_test.r_x[pos]);
-			if(j>(16-rw_prec/32-1))
-			{
-				printf("%x", PostOp_params_163_test.r_x[pos],pos);
-			}
-			else{
-				printf("");
-			}
-			pos++;
-		}
-		printf("\n");
-	}
+	// pos = 0;
+	// for(i=0;i<8;i++)
+	// {
+	// 	printf("A%d: ",8-i);
+	// 	for(j=0;j<16;j++)
+	// 	{
+	// 		//printf("%08x", PostOp_params_163_test.r_a[pos]);
+	// 		if(j>(16-rw_prec/32-1))
+	// 		{
+	// 			printf("%x", PostOp_params_163_test.r_a[pos],pos);
+	// 		}
+	// 		else{
+	// 			printf("");
+	// 		}
+	// 		pos++;
+	// 	}
+	// 	printf("\n");
+	// }
+	// pos = 0;
+	// for(i=0;i<8;i++)
+	// {
+	// 	printf("E%d: ",8-i);
+	// 	for(j=0;j<16;j++)
+	// 	{
+	// 		//printf("%08x", PostOp_params_163_test.r_e[pos]);
+	// 		if(j>(16-rw_prec/32-1))
+	// 		{
+	// 			printf("%x", PostOp_params_163_test.r_e[pos],pos);
+	// 		}
+	// 		else{
+	// 			printf("");
+	// 		}
+	// 		pos++;
+	// 	}
+	// 	printf("\n");
+	// }
+	// pos = 0;
+	// for(i=0;i<8;i++)
+	// {
+	// 	printf("X%d: ",8-i);
+	// 	for(j=0;j<16;j++)
+	// 	{
+	// 		//printf("%08x", PostOp_params_163_test.r_x[pos]);
+	// 		if(j>(16-rw_prec/32-1))
+	// 		{
+	// 			printf("%x", PostOp_params_163_test.r_x[pos],pos);
+	// 		}
+	// 		else{
+	// 			printf("");
+	// 		}
+	// 		pos++;
+	// 	}
+	// 	printf("\n");
+	// }
 
 
 

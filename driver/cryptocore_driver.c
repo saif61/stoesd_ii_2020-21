@@ -4114,7 +4114,7 @@ static void MWMAC_PointMult(PointMult_params_t *PointMult_params_ptr)
 	// }
 	
 	
-	MWMAC_PostOp(PointMult_params_ptr);
+	//MWMAC_PostOp(PointMult_params_ptr);
 	
 	
 	//Read Result r_b from B Register Memory 
